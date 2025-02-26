@@ -4,6 +4,7 @@ import random
 import time
 import queue
 import datetime
+import os
 
 class VirtualMachine:
     """Class representing a single virtual machine in a distributed system.
@@ -32,7 +33,8 @@ class VirtualMachine:
         self.peers = peers
         self.message_queue = queue.Queue()
         self.lock = threading.Lock()
-        self.log_file = open(f'VM_{vm_id}_log.txt', 'w')
+        os.makedirs('logs', exist_ok=True)
+        self.log_file = open(f'logs/vm_{vm_id}_log.txt', 'w')
         self.running = True
         
         print(f"VM{self.vm_id} on localhost:{5000 + self.vm_id} started with clock rate {self.clock_rate} ticks/second")
