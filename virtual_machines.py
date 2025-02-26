@@ -35,6 +35,8 @@ class VirtualMachine:
         self.log_file = open(f'VM_{vm_id}_log.txt', 'w')
         self.running = True
         
+        print(f"VM{self.vm_id} on localhost:{5000 + self.vm_id} started with clock rate {self.clock_rate} ticks/second")
+
         # Log initialization information
         self.log_file.write(f"============= VM{vm_id} LOG START =============\n")
         self.log_file.write(f"Clock rate: {self.clock_rate} ticks per second\n")
@@ -54,8 +56,6 @@ class VirtualMachine:
         server_socket.listen(len(self.peers))
         server_socket.settimeout(1.0)  # Add timeout to allow clean shutdown
         
-        print(f"VM{self.vm_id}: Listening on localhost:{5000 + self.vm_id}")
-
         while self.running:
             try:
                 conn, addr = server_socket.accept()
@@ -139,8 +139,6 @@ class VirtualMachine:
 
     def run(self):
         """Main execution loop for the virtual machine."""
-        print(f"VM{self.vm_id} started with clock rate {self.clock_rate}")
-        
         # Allow time for all VMs to start up
         time.sleep(1)
         
@@ -200,11 +198,6 @@ def main():
     for i in range(num_machines):
         peers = [j for j in range(num_machines) if j != i]
         machines.append(VirtualMachine(i, peers))
-    
-    # Log the clock rates
-    print("Clock rates:")
-    for i, m in enumerate(machines):
-        print(f"VM{i}: {m.clock_rate} ticks/second")
     
     # Start all machines
     threads = []
