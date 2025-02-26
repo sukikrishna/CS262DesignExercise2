@@ -120,7 +120,7 @@ class VirtualMachine:
             log_entry = (
                 f"{event_type}: {received_time} | "
                 f"System time: {system_time} | "
-                f"Logical Clock Time: {self.logical_clock} |"
+                f"Logical Clock Time: {self.logical_clock} | "
                 f"Message Queue Length: {queue_length} \n"
             )
         elif event_type == "Sent":
@@ -149,8 +149,8 @@ class VirtualMachine:
             
             # Check for messages in the queue
             if not self.message_queue.empty():
-                received_time = self.message_queue.get()
                 with self.lock:
+                    received_time = self.message_queue.get_nowait()
                     self.logical_clock = max(self.logical_clock, received_time) + 1
                 self.log_event("Received", received_time)
             else:
