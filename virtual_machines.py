@@ -19,7 +19,7 @@ class VirtualMachine:
         log_file: An open file for writing logs.
         running: A boolean indicating if the VM is running.
     """
-    
+
     def __init__(self, vm_id, peers):
         """Initialize the virtual machine with its parameters.
         
@@ -28,15 +28,18 @@ class VirtualMachine:
             peers: List of peer VM IDs to communicate with.
         """
         self.vm_id = vm_id
-        self.clock_rate = random.randint(1, 6)
+        self.clock_rate = random.randint(1, 6)  # Ticks per second
         self.logical_clock = 0
         self.peers = peers
-        self.message_queue = queue.Queue()
-        self.lock = threading.Lock()
-        os.makedirs('logs', exist_ok=True)
-        self.log_file = open(f'logs/vm_{vm_id}_log.txt', 'w')
-        self.running = True
         
+        self.network_queue = queue.Queue()  # Incoming network messages
+        self.message_queue = queue.Queue()  # Messages ready for processing
+        self.lock = threading.Lock()
+        
+        os.makedirs('logs', exist_ok=True)
+        self.log_file = open(f'logs/vm{vm_id}_log.txt', 'w')
+        self.running = True
+
         print(f"VM{self.vm_id} on localhost:{5000 + self.vm_id} started with clock rate {self.clock_rate} ticks/second")
 
         # Log initialization information
@@ -45,25 +48,25 @@ class VirtualMachine:
         self.log_file.write(f"Peers: {peers}\n\n")
         self.log_file.flush()
 
-        # Start server thread to listen for incoming messages
+        # Start server thread for listening to incoming messages
         self.server_thread = threading.Thread(target=self.listen_for_messages)
         self.server_thread.daemon = True
         self.server_thread.start()
 
     def listen_for_messages(self):
-        """Thread for listening and receiving messages from other VMs."""
+        """Thread for receiving messages and storing them in the network queue."""
         server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
         server_socket.bind(("localhost", 5000 + self.vm_id))
         server_socket.listen(len(self.peers))
-        server_socket.settimeout(1.0)  # Add timeout to allow clean shutdown
+        server_socket.settimeout(1.0)  # Allow periodic checking for shutdown
         
         while self.running:
             try:
                 conn, addr = server_socket.accept()
                 client_handler = threading.Thread(
                     target=self.handle_client,
-                    args=(conn, addr)
+                    args=(conn,)
                 )
                 client_handler.daemon = True
                 client_handler.start()
@@ -75,32 +78,26 @@ class VirtualMachine:
         
         server_socket.close()
     
-    def handle_client(self, conn, addr):
+    def handle_client(self, conn):
         """Handle an individual client connection.
         
         Args:
             conn: Socket connection to client.
-            addr: Address of the client.
         """
         try:
             message = conn.recv(1024).decode()
             if message:
-                self.message_queue.put(int(message))
+                self.network_queue.put(int(message))  # Store in network queue
             conn.close()
         except Exception as e:
             print(f"VM{self.vm_id} error handling client: {e}")
-    
+
     def send_message(self, recipient_id):
-        """Send logical clock time to another VM.
-        
-        Args:
-            recipient_id: ID of the recipient VM.
-        """
+        """Send logical clock time to another VM."""
         try:
             with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
                 s.connect(("localhost", 5000 + recipient_id))
                 s.sendall(str(self.logical_clock).encode())
-                s.close()
         except ConnectionRefusedError:
             print(f"VM{self.vm_id}: Connection refused when sending to VM{recipient_id}")
         except Exception as e:
@@ -115,13 +112,13 @@ class VirtualMachine:
         """
         system_time = datetime.datetime.now()
         queue_length = self.message_queue.qsize()
-        
+
         if event_type == "Received":
             log_entry = (
                 f"{event_type}: {received_time} | "
                 f"System time: {system_time} | "
                 f"Logical Clock Time: {self.logical_clock} | "
-                f"Message Queue Length: {queue_length} \n"
+                f"Message Queue Length: {queue_length}\n"
             )
         elif event_type == "Sent":
             log_entry = (
@@ -135,39 +132,40 @@ class VirtualMachine:
                 f"System time: {system_time} | "
                 f"Logical Clock Time: {self.logical_clock}\n"
             )
-        
+
         self.log_file.write(log_entry)
         self.log_file.flush()
 
     def run(self):
         """Main execution loop for the virtual machine."""
-        # Allow time for all VMs to start up
-        time.sleep(1)
-        
+        time.sleep(1)  # Allow all VMs to start
+
         while self.running:
             start_time = time.time()
-            
-            # Check for messages in the queue
+
+            # Move messages from network queue to message queue
+            while not self.network_queue.empty():
+                self.message_queue.put(self.network_queue.get_nowait())
+
+            # Process messages in the message queue
             if not self.message_queue.empty():
                 with self.lock:
                     received_time = self.message_queue.get_nowait()
                     self.logical_clock = max(self.logical_clock, received_time) + 1
                 self.log_event("Received", received_time)
             else:
-                # No message in queue, generate an event
+                # No incoming messages, generate an event
                 event_type = random.randint(1, 10)
                 with self.lock:
                     self.logical_clock += 1
-                
+
                 if event_type == 1:
                     # Send to one random peer
-                    peer = self.peers[0]
-                    self.send_message(peer)
+                    self.send_message(self.peers[0])
                     self.log_event("Sent")
                 elif event_type == 2:
                     # Send to another random peer
-                    peer = self.peers[1]
-                    self.send_message(peer)
+                    self.send_message(self.peers[1])
                     self.log_event("Sent")
                 elif event_type == 3:
                     # Send to all peers
@@ -177,7 +175,7 @@ class VirtualMachine:
                 else:
                     # Internal event (values 4-10)
                     self.log_event("Internal")
-            
+
             elapsed = time.time() - start_time
             sleep_time = max(0, (1 / self.clock_rate) - elapsed)
             time.sleep(sleep_time)
@@ -195,34 +193,34 @@ def main():
     """Main function to initialize and run the virtual machines."""
     num_machines = 3
     machines = []
-    
+
     # Create virtual machines
     for i in range(num_machines):
         peers = [j for j in range(num_machines) if j != i]
         machines.append(VirtualMachine(i, peers))
-    
+
     # Start all machines
     threads = []
     for m in machines:
         t = threading.Thread(target=m.run)
         t.start()
         threads.append(t)
-    
+
     try:
         # Run for one minute
         print("System running for 60 seconds...")
         time.sleep(60)
     except KeyboardInterrupt:
         print("Interrupted by user")
-    
+
     # Stop all machines
     for m in machines:
         m.stop()
-    
+
     # Wait for all threads to complete
     for t in threads:
         t.join()
-    
+
     print("All virtual machines stopped. Check log files for details.")
 
 
