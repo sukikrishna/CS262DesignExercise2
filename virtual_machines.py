@@ -20,12 +20,13 @@ class VirtualMachine:
         running: A boolean indicating if the VM is running.
     """
 
-    def __init__(self, vm_id, peers):
+    def __init__(self, vm_id, peers, simulation_id):
         """Initialize the virtual machine with its parameters.
         
         Args:
             vm_id: Identifier for the virtual machine.
             peers: List of peer VM IDs to communicate with.
+            simulation_id (int): The ID of the simulation run.
         """
         self.vm_id = vm_id
         self.clock_rate = random.randint(1, 6)  # Ticks per second
@@ -37,7 +38,7 @@ class VirtualMachine:
         self.lock = threading.Lock()
         
         os.makedirs('logs', exist_ok=True)
-        self.log_file = open(f'logs/vm{vm_id}_log.txt', 'w')
+        self.log_file = open(f'logs/sim{simulation_id}_vm{vm_id}_log.txt', 'w')
         self.running = True
 
         print(f"VM{self.vm_id} on localhost:{5000 + self.vm_id} started with clock rate {self.clock_rate} ticks/second")
@@ -60,7 +61,9 @@ class VirtualMachine:
         server_socket.bind(("localhost", 5000 + self.vm_id))
         server_socket.listen(len(self.peers))
         server_socket.settimeout(1.0)  # Allow periodic checking for shutdown
-        
+
+        self.server_socket = server_socket  # Save reference to close later
+
         while self.running:
             try:
                 conn, addr = server_socket.accept()
@@ -183,46 +186,67 @@ class VirtualMachine:
     def stop(self):
         """Stop the virtual machine and clean up resources."""
         self.running = False
-        if self.log_file:
+        if hasattr(self, 'server_socket'):  # Check if server socket exists
+            self.server_socket.close()  # Close socket to free port
+        if self.log_file and not self.log_file.closed:  # Check if file is open before writing
             self.log_file.write("\n============= VM LOG END =============\n")
             self.log_file.close()
         print(f"VM{self.vm_id} stopped")
 
+def run_simulation(simulation_id):
+    """
+    Runs a single instance of the virtual machine simulation.
 
-def main():
-    """Main function to initialize and run the virtual machines."""
+    Args:
+        simulation_id (int): The ID of the simulation run.
+    
+    This function initializes and runs a set of virtual machines, each running
+    in a separate thread. The VMs communicate with each other and maintain
+    logical clocks. The simulation runs for 60 seconds before shutting down.
+    """
     num_machines = 3
     machines = []
 
     # Create virtual machines
-    for i in range(num_machines):
-        peers = [j for j in range(num_machines) if j != i]
-        machines.append(VirtualMachine(i, peers))
+    for vm_id in range(num_machines):
+        peers = [j for j in range(num_machines) if j != vm_id]
+        machines.append(VirtualMachine(vm_id, peers, simulation_id))
 
-    # Start all machines
+    # Start all machines in separate threads
     threads = []
-    for m in machines:
-        t = threading.Thread(target=m.run)
-        t.start()
-        threads.append(t)
+    for vm in machines:
+        thread = threading.Thread(target=vm.run)
+        thread.start()
+        threads.append(thread)
 
     try:
-        # Run for one minute
-        print("System running for 60 seconds...")
+        print(f"Simulation {simulation_id + 1} running for 60 seconds...")
         time.sleep(60)
     except KeyboardInterrupt:
-        print("Interrupted by user")
+        print("Simulation interrupted by user")
 
     # Stop all machines
-    for m in machines:
-        m.stop()
+    for vm in machines:
+        vm.stop()
 
     # Wait for all threads to complete
-    for t in threads:
-        t.join()
+    for thread in threads:
+        thread.join()
 
-    print("All virtual machines stopped. Check log files for details.")
+    # Wait before starting the next simulation to prevent port conflicts
+    time.sleep(3)  # Allow OS to release ports
 
+    print(f"Simulation {simulation_id + 1} complete. Check log files for details.")
+
+def main():
+    """
+    Runs multiple simulations sequentially.
+
+    This function runs the virtual machine simulation five times,
+    each for a duration of 60 seconds.
+    """
+    for i in range(1,6):
+        run_simulation(i)
 
 if __name__ == "__main__":
     main()
