@@ -6,17 +6,17 @@ We aimed to simulate a distributed system with multiple virtual machines (VMs) r
 
 ## Design Decisions
 
-### Processing Messages
+### 1. Processing Messages
 We have two queues in our implementation:
 1. Network Queue: A queue where incoming messages are initially stored when they arrive via a socket connection.
 2. Message Queue: A separate queue that holds messages that are ready to be processed by the virtual machine on its logical clock cycle.
 In our design, messages are first received in the network queue, which operates independently of the machine's clock cycle. The machine then moves messages from the network queue to the message queue, where they wait to be processed according to the machine’s clock rate. This separation ensures that network delays and processing delays are independent, just as in real-world distributed systems.
 
-### Assigning Different Ports for Each VM 
+### 2. Assigning Different Ports for Each VM 
 Each VM listens on a different port because they're all running on the same machine (i.e. 127.0.0.1 or localhost). If they used the same port, there would be a conflict since only one process can bind to a specific port at a time.
 We assign each VM a unique port by adding the VM's ID to a base port number (5000). So VM 0 listens on port 5000, VM 1 on port 5001, and VM 2 on port 5002.
 
-### Each VM is Handled in a Separate Thread
+### 3. Each VM is Handled in a Separate Thread
 Initially we thought to implement each of the VMs as a separate process but later decided to implement each VM in a separate thread for simplicity. We implemented the VirtualMachine class as a regular class and used threads to run each VM instance concurrently. This design allows VMs to execute independently while still sharing memory, making message passing easier without requiring inter-process communication.
 
 Our implementation uses three threads to handle different aspects of each VM's operation:
@@ -25,13 +25,13 @@ Our implementation uses three threads to handle different aspects of each VM's o
 3. Client Handler Threads: Takes in incoming messages, and places them in the network queue
 However, to ensure synchronization, only the main execution thread updates the logical clock. This prevents race conditions and ensures that logical time updates happen in a controlled manner.
 
-### Continuous Server Listening Using Non-Blocking Sockets
+### 4. Continuous Server Listening Using Non-Blocking Sockets
 We decided to keep the server continuously listening for incoming messages using a dedicated thread without blocking execution. Each incoming message spawns a new thread to handle the client request, allowing multiple messages to be received in parallel. A timeout mechanism ensures that the server remains responsive and can shut down gracefully when needed.
 
-### Thread-Safe Synchronization with Locks
+### 5. Thread-Safe Synchronization with Locks
 We use a thread lock to ensure that updates to the logical clock are atomic since multiple threads access the logical clock concurrently (main thread, message processing thread, network listener). This prevents race conditions where two threads might update the clock simultaneously, leading to inconsistencies.
 
-### Logical Clock Update Following [Lamport's algorithm](https://en.wikipedia.org/wiki/Lamport_timestamp)
+### 6. Logical Clock Update Following [Lamport's algorithm](https://en.wikipedia.org/wiki/Lamport_timestamp)
 Each virtual machine maintains a logical clock that is updated based on Lamport’s logical clock rules:
 1. If a message is received, the logical clock is updated to `max(local_clock, received_timestamp) + 1`.
 2. If an internal event occurs, the logical clock is simply incremented by 1. This ensures that event ordering is maintained in the distributed system, even if messages arrive out of order.
@@ -56,3 +56,45 @@ Each virtual machine maintains a logical clock that is updated based on Lamport�
 - In the `run()` method, each VM checks its message queue on each clock cycle
 - If there's a message, it updates its logical clock according to the logical clock rules (taking the maximum of the received time and its own clock, then incrementing by 1)
 - If there's no message, it generates a random event (internal or send)
+
+---------------------------------------------------------
+
+## Day to Day Progress
+
+#### Feb 27, 2025
+
+We fixed the code by adding two distinct message queues to handle incoming and processed messages. We also reran the simulation to generate 15 logs and began preparing to analyze the results.
+
+##### Work Completed:
+
+- We edited the code to have two message queues, one would be the network queue to store incoming messages from the socket connection, and the other is the message queue to hold messages ready to be processed by the virtual machine on its logical clock cycle.
+- Reran the simulation to collect all 15 logs.
+- Began work on the engineering notebook and planning analysis.
+- Added test code and analyzed logs for variations and observations between trials.
+
+#### Feb 26, 2025
+
+We mainly discussed the behavior of the machine’s message handling during sleep and awake states, as well as considerations around socket management and synchronization.
+
+##### Work Completed:
+- Defined message handling flow: Incoming messages go to the socket queue when asleep, and to the internal queue when awake.
+- Ensured that only one message is processed at a time when the machine is awake.
+- Clarified no need for multithreading or the Process class—just sockets connecting the machines.
+- Noted that closing and opening sockets introduces delays; ports should remain open for efficiency.
+- Decided to keep port listening always active for synchronization, similar to chat app functionality.
+- Emphasized the importance of keeping ports open due to high cost of closing and reopening.
+- Confirmed that logical clocks are modified by the run only, with no multithreading involved.
+
+#### Feb 25, 2025
+we reviewed the design exercise requirements and discussed various approaches to implementing the project.
+
+##### Work Completed:
+- Reviewed design exercise requirements.
+- Edited starter code from Claude for proper logging and docstrings.
+- Discussed how we would format and save the 15 logs across three machines (5 runs each).
+- Discussed the receive block and [get.no_wait](https://docs.python.org/3/library/queue.html#queue.Queue.get) functionality for the messaging queue. In the end we are using queue's in order to store the messages rather than appending to a list.
+- Analyzed the logs and we observed that there were some complexities and randomness with how the number of messages in the message queue was being stored.
+- Debated using processes vs. threads for concurrency. It seems like without having multiple threads for the logical clocks, then to make the VM send and receive messages at the same time, the VM needs to be made into a process.
+- Explored virtual machine control versus peer-to-peer setup.
+- Considered adjusting random limits for simulations.
+- Confirmed initialization process for peer messaging.
