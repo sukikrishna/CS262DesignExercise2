@@ -1,0 +1,301 @@
+============= VM2 LOG START =============
+Clock rate: 5 ticks per second
+Peers: [0, 1]
+
+Sent: 1 | System time: 2025-03-04 17:56:34.734714 | Logical Clock Time: 1
+Received: 1 | System time: 2025-03-04 17:56:34.929256 | Logical Clock Time: 2 | Message Queue Length: 0
+Received: 2 | System time: 2025-03-04 17:56:35.129561 | Logical Clock Time: 3 | Message Queue Length: 0
+Internal event | System time: 2025-03-04 17:56:35.330319 | Logical Clock Time: 4
+Internal event | System time: 2025-03-04 17:56:35.530553 | Logical Clock Time: 5
+Internal event | System time: 2025-03-04 17:56:35.730733 | Logical Clock Time: 6
+Sent: 7 | System time: 2025-03-04 17:56:35.932500 | Logical Clock Time: 7
+Received: 7 | System time: 2025-03-04 17:56:36.131790 | Logical Clock Time: 8 | Message Queue Length: 0
+Internal event | System time: 2025-03-04 17:56:36.331928 | Logical Clock Time: 9
+Internal event | System time: 2025-03-04 17:56:36.532471 | Logical Clock Time: 10
+Received: 10 | System time: 2025-03-04 17:56:36.732705 | Logical Clock Time: 11 | Message Queue Length: 0
+Sent: 12 | System time: 2025-03-04 17:56:36.933592 | Logical Clock Time: 12
+Sent: 13 | System time: 2025-03-04 17:56:37.135014 | Logical Clock Time: 13
+Internal event | System time: 2025-03-04 17:56:37.333370 | Logical Clock Time: 14
+Received: 14 | System time: 2025-03-04 17:56:37.533631 | Logical Clock Time: 15 | Message Queue Length: 0
+Received: 15 | System time: 2025-03-04 17:56:37.733809 | Logical Clock Time: 16 | Message Queue Length: 0
+Internal event | System time: 2025-03-04 17:56:37.934241 | Logical Clock Time: 17
+Received: 17 | System time: 2025-03-04 17:56:38.134560 | Logical Clock Time: 18 | Message Queue Length: 0
+Internal event | System time: 2025-03-04 17:56:38.334776 | Logical Clock Time: 19
+Sent: 20 | System time: 2025-03-04 17:56:38.535360 | Logical Clock Time: 20
+Internal event | System time: 2025-03-04 17:56:38.735431 | Logical Clock Time: 21
+Received: 22 | System time: 2025-03-04 17:56:38.935702 | Logical Clock Time: 23 | Message Queue Length: 0
+Sent: 24 | System time: 2025-03-04 17:56:39.138397 | Logical Clock Time: 24
+Received: 24 | System time: 2025-03-04 17:56:39.336394 | Logical Clock Time: 25 | Message Queue Length: 0
+Sent: 26 | System time: 2025-03-04 17:56:39.537300 | Logical Clock Time: 26
+Received: 26 | System time: 2025-03-04 17:56:39.737373 | Logical Clock Time: 27 | Message Queue Length: 0
+Sent: 28 | System time: 2025-03-04 17:56:39.941286 | Logical Clock Time: 28
+Received: 29 | System time: 2025-03-04 17:56:40.138659 | Logical Clock Time: 30 | Message Queue Length: 0
+Received: 30 | System time: 2025-03-04 17:56:40.338910 | Logical Clock Time: 31 | Message Queue Length: 0
+Internal event | System time: 2025-03-04 17:56:40.539589 | Logical Clock Time: 32
+Sent: 33 | System time: 2025-03-04 17:56:40.740351 | Logical Clock Time: 33
+Sent: 34 | System time: 2025-03-04 17:56:40.940576 | Logical Clock Time: 34
+Received: 35 | System time: 2025-03-04 17:56:41.140450 | Logical Clock Time: 36 | Message Queue Length: 0
+Received: 36 | System time: 2025-03-04 17:56:41.340811 | Logical Clock Time: 37 | Message Queue Length: 0
+Sent: 38 | System time: 2025-03-04 17:56:41.542433 | Logical Clock Time: 38
+Internal event | System time: 2025-03-04 17:56:41.742045 | Logical Clock Time: 39
+Received: 39 | System time: 2025-03-04 17:56:41.942311 | Logical Clock Time: 40 | Message Queue Length: 0
+Sent: 41 | System time: 2025-03-04 17:56:42.147302 | Logical Clock Time: 41
+Received: 41 | System time: 2025-03-04 17:56:42.342784 | Logical Clock Time: 42 | Message Queue Length: 0
+Sent: 43 | System time: 2025-03-04 17:56:42.545589 | Logical Clock Time: 43
+Sent: 44 | System time: 2025-03-04 17:56:42.744890 | Logical Clock Time: 44
+Sent: 45 | System time: 2025-03-04 17:56:42.944369 | Logical Clock Time: 45
+Sent: 46 | System time: 2025-03-04 17:56:43.144203 | Logical Clock Time: 46
+Internal event | System time: 2025-03-04 17:56:43.344612 | Logical Clock Time: 47
+Sent: 48 | System time: 2025-03-04 17:56:43.546654 | Logical Clock Time: 48
+Sent: 49 | System time: 2025-03-04 17:56:43.745719 | Logical Clock Time: 49
+Sent: 50 | System time: 2025-03-04 17:56:43.946831 | Logical Clock Time: 50
+Internal event | System time: 2025-03-04 17:56:44.145643 | Logical Clock Time: 51
+Sent: 52 | System time: 2025-03-04 17:56:44.347715 | Logical Clock Time: 52
+Sent: 53 | System time: 2025-03-04 17:56:44.546631 | Logical Clock Time: 53
+Internal event | System time: 2025-03-04 17:56:44.746346 | Logical Clock Time: 54
+Sent: 55 | System time: 2025-03-04 17:56:44.946990 | Logical Clock Time: 55
+Sent: 56 | System time: 2025-03-04 17:56:45.148291 | Logical Clock Time: 56
+Sent: 57 | System time: 2025-03-04 17:56:45.347457 | Logical Clock Time: 57
+Internal event | System time: 2025-03-04 17:56:45.547304 | Logical Clock Time: 58
+Internal event | System time: 2025-03-04 17:56:45.747698 | Logical Clock Time: 59
+Received: 59 | System time: 2025-03-04 17:56:45.948069 | Logical Clock Time: 60 | Message Queue Length: 0
+Received: 60 | System time: 2025-03-04 17:56:46.148478 | Logical Clock Time: 61 | Message Queue Length: 0
+Received: 61 | System time: 2025-03-04 17:56:46.348923 | Logical Clock Time: 62 | Message Queue Length: 1
+Received: 62 | System time: 2025-03-04 17:56:46.549204 | Logical Clock Time: 63 | Message Queue Length: 0
+Received: 64 | System time: 2025-03-04 17:56:46.749610 | Logical Clock Time: 65 | Message Queue Length: 0
+Sent: 66 | System time: 2025-03-04 17:56:46.950360 | Logical Clock Time: 66
+Sent: 67 | System time: 2025-03-04 17:56:47.150437 | Logical Clock Time: 67
+Internal event | System time: 2025-03-04 17:56:47.350203 | Logical Clock Time: 68
+Sent: 69 | System time: 2025-03-04 17:56:47.551811 | Logical Clock Time: 69
+Sent: 70 | System time: 2025-03-04 17:56:47.753392 | Logical Clock Time: 70
+Sent: 71 | System time: 2025-03-04 17:56:47.953585 | Logical Clock Time: 71
+Sent: 72 | System time: 2025-03-04 17:56:48.151930 | Logical Clock Time: 72
+Internal event | System time: 2025-03-04 17:56:48.351510 | Logical Clock Time: 73
+Sent: 74 | System time: 2025-03-04 17:56:48.553386 | Logical Clock Time: 74
+Received: 74 | System time: 2025-03-04 17:56:48.752046 | Logical Clock Time: 75 | Message Queue Length: 0
+Received: 75 | System time: 2025-03-04 17:56:48.952349 | Logical Clock Time: 76 | Message Queue Length: 0
+Received: 77 | System time: 2025-03-04 17:56:49.152708 | Logical Clock Time: 78 | Message Queue Length: 0
+Sent: 79 | System time: 2025-03-04 17:56:49.355469 | Logical Clock Time: 79
+Internal event | System time: 2025-03-04 17:56:49.553576 | Logical Clock Time: 80
+Sent: 81 | System time: 2025-03-04 17:56:49.757643 | Logical Clock Time: 81
+Received: 81 | System time: 2025-03-04 17:56:49.954528 | Logical Clock Time: 82 | Message Queue Length: 0
+Sent: 83 | System time: 2025-03-04 17:56:50.156478 | Logical Clock Time: 83
+Internal event | System time: 2025-03-04 17:56:50.355038 | Logical Clock Time: 84
+Sent: 85 | System time: 2025-03-04 17:56:50.558083 | Logical Clock Time: 85
+Received: 85 | System time: 2025-03-04 17:56:50.755832 | Logical Clock Time: 86 | Message Queue Length: 0
+Received: 86 | System time: 2025-03-04 17:56:50.956087 | Logical Clock Time: 87 | Message Queue Length: 0
+Received: 88 | System time: 2025-03-04 17:56:51.156419 | Logical Clock Time: 89 | Message Queue Length: 0
+Received: 88 | System time: 2025-03-04 17:56:51.356829 | Logical Clock Time: 90 | Message Queue Length: 1
+Received: 89 | System time: 2025-03-04 17:56:51.557287 | Logical Clock Time: 91 | Message Queue Length: 1
+Received: 89 | System time: 2025-03-04 17:56:51.757760 | Logical Clock Time: 92 | Message Queue Length: 0
+Received: 91 | System time: 2025-03-04 17:56:51.957980 | Logical Clock Time: 93 | Message Queue Length: 0
+Sent: 94 | System time: 2025-03-04 17:56:52.159153 | Logical Clock Time: 94
+Received: 93 | System time: 2025-03-04 17:56:52.358686 | Logical Clock Time: 95 | Message Queue Length: 0
+Sent: 96 | System time: 2025-03-04 17:56:52.561046 | Logical Clock Time: 96
+Sent: 97 | System time: 2025-03-04 17:56:52.760824 | Logical Clock Time: 97
+Sent: 98 | System time: 2025-03-04 17:56:52.960474 | Logical Clock Time: 98
+Sent: 99 | System time: 2025-03-04 17:56:53.160099 | Logical Clock Time: 99
+Internal event | System time: 2025-03-04 17:56:53.360109 | Logical Clock Time: 100
+Received: 101 | System time: 2025-03-04 17:56:53.560336 | Logical Clock Time: 102 | Message Queue Length: 0
+Sent: 103 | System time: 2025-03-04 17:56:53.760922 | Logical Clock Time: 103
+Sent: 104 | System time: 2025-03-04 17:56:53.964009 | Logical Clock Time: 104
+Sent: 105 | System time: 2025-03-04 17:56:54.161583 | Logical Clock Time: 105
+Internal event | System time: 2025-03-04 17:56:54.361513 | Logical Clock Time: 106
+Received: 107 | System time: 2025-03-04 17:56:54.561926 | Logical Clock Time: 108 | Message Queue Length: 0
+Sent: 109 | System time: 2025-03-04 17:56:54.762409 | Logical Clock Time: 109
+Sent: 110 | System time: 2025-03-04 17:56:54.962731 | Logical Clock Time: 110
+Sent: 111 | System time: 2025-03-04 17:56:55.163511 | Logical Clock Time: 111
+Internal event | System time: 2025-03-04 17:56:55.363604 | Logical Clock Time: 112
+Sent: 113 | System time: 2025-03-04 17:56:55.564831 | Logical Clock Time: 113
+Sent: 114 | System time: 2025-03-04 17:56:55.766775 | Logical Clock Time: 114
+Sent: 115 | System time: 2025-03-04 17:56:55.966104 | Logical Clock Time: 115
+Sent: 116 | System time: 2025-03-04 17:56:56.166712 | Logical Clock Time: 116
+Received: 117 | System time: 2025-03-04 17:56:56.365691 | Logical Clock Time: 118 | Message Queue Length: 0
+Received: 118 | System time: 2025-03-04 17:56:56.565913 | Logical Clock Time: 119 | Message Queue Length: 0
+Internal event | System time: 2025-03-04 17:56:56.766073 | Logical Clock Time: 120
+Sent: 121 | System time: 2025-03-04 17:56:56.967839 | Logical Clock Time: 121
+Sent: 122 | System time: 2025-03-04 17:56:57.168162 | Logical Clock Time: 122
+Internal event | System time: 2025-03-04 17:56:57.366905 | Logical Clock Time: 123
+Sent: 124 | System time: 2025-03-04 17:56:57.569046 | Logical Clock Time: 124
+Sent: 125 | System time: 2025-03-04 17:56:57.769495 | Logical Clock Time: 125
+Sent: 126 | System time: 2025-03-04 17:56:57.969859 | Logical Clock Time: 126
+Internal event | System time: 2025-03-04 17:56:58.169967 | Logical Clock Time: 127
+Received: 128 | System time: 2025-03-04 17:56:58.370171 | Logical Clock Time: 129 | Message Queue Length: 0
+Sent: 130 | System time: 2025-03-04 17:56:58.571793 | Logical Clock Time: 130
+Internal event | System time: 2025-03-04 17:56:58.770557 | Logical Clock Time: 131
+Sent: 132 | System time: 2025-03-04 17:56:58.971473 | Logical Clock Time: 132
+Sent: 133 | System time: 2025-03-04 17:56:59.172884 | Logical Clock Time: 133
+Internal event | System time: 2025-03-04 17:56:59.371524 | Logical Clock Time: 134
+Received: 135 | System time: 2025-03-04 17:56:59.571756 | Logical Clock Time: 136 | Message Queue Length: 0
+Received: 136 | System time: 2025-03-04 17:56:59.772398 | Logical Clock Time: 137 | Message Queue Length: 1
+Received: 137 | System time: 2025-03-04 17:56:59.972788 | Logical Clock Time: 138 | Message Queue Length: 1
+Received: 137 | System time: 2025-03-04 17:57:00.173173 | Logical Clock Time: 139 | Message Queue Length: 2
+Received: 138 | System time: 2025-03-04 17:57:00.373378 | Logical Clock Time: 140 | Message Queue Length: 1
+Received: 139 | System time: 2025-03-04 17:57:00.573660 | Logical Clock Time: 141 | Message Queue Length: 1
+Received: 141 | System time: 2025-03-04 17:57:00.773846 | Logical Clock Time: 142 | Message Queue Length: 1
+Received: 143 | System time: 2025-03-04 17:57:00.974162 | Logical Clock Time: 144 | Message Queue Length: 1
+Received: 144 | System time: 2025-03-04 17:57:01.174457 | Logical Clock Time: 145 | Message Queue Length: 1
+Received: 146 | System time: 2025-03-04 17:57:01.374726 | Logical Clock Time: 147 | Message Queue Length: 1
+Received: 146 | System time: 2025-03-04 17:57:01.575003 | Logical Clock Time: 148 | Message Queue Length: 1
+Received: 147 | System time: 2025-03-04 17:57:01.775150 | Logical Clock Time: 149 | Message Queue Length: 1
+Received: 149 | System time: 2025-03-04 17:57:01.975486 | Logical Clock Time: 150 | Message Queue Length: 0
+Sent: 151 | System time: 2025-03-04 17:57:02.177281 | Logical Clock Time: 151
+Sent: 152 | System time: 2025-03-04 17:57:02.377027 | Logical Clock Time: 152
+Sent: 153 | System time: 2025-03-04 17:57:02.577208 | Logical Clock Time: 153
+Sent: 154 | System time: 2025-03-04 17:57:02.779150 | Logical Clock Time: 154
+Received: 155 | System time: 2025-03-04 17:57:02.977225 | Logical Clock Time: 156 | Message Queue Length: 0
+Sent: 157 | System time: 2025-03-04 17:57:03.181796 | Logical Clock Time: 157
+Received: 157 | System time: 2025-03-04 17:57:03.378713 | Logical Clock Time: 158 | Message Queue Length: 0
+Sent: 159 | System time: 2025-03-04 17:57:03.579172 | Logical Clock Time: 159
+Internal event | System time: 2025-03-04 17:57:03.779345 | Logical Clock Time: 160
+Sent: 161 | System time: 2025-03-04 17:57:03.979792 | Logical Clock Time: 161
+Internal event | System time: 2025-03-04 17:57:04.179971 | Logical Clock Time: 162
+Received: 162 | System time: 2025-03-04 17:57:04.380475 | Logical Clock Time: 163 | Message Queue Length: 0
+Sent: 164 | System time: 2025-03-04 17:57:04.580882 | Logical Clock Time: 164
+Sent: 165 | System time: 2025-03-04 17:57:04.782775 | Logical Clock Time: 165
+Received: 166 | System time: 2025-03-04 17:57:04.981105 | Logical Clock Time: 167 | Message Queue Length: 0
+Sent: 168 | System time: 2025-03-04 17:57:05.181512 | Logical Clock Time: 168
+Internal event | System time: 2025-03-04 17:57:05.381404 | Logical Clock Time: 169
+Received: 169 | System time: 2025-03-04 17:57:05.581783 | Logical Clock Time: 170 | Message Queue Length: 0
+Sent: 171 | System time: 2025-03-04 17:57:05.783132 | Logical Clock Time: 171
+Sent: 172 | System time: 2025-03-04 17:57:05.982520 | Logical Clock Time: 172
+Internal event | System time: 2025-03-04 17:57:06.182489 | Logical Clock Time: 173
+Received: 174 | System time: 2025-03-04 17:57:06.382709 | Logical Clock Time: 175 | Message Queue Length: 0
+Received: 175 | System time: 2025-03-04 17:57:06.582903 | Logical Clock Time: 176 | Message Queue Length: 0
+Sent: 177 | System time: 2025-03-04 17:57:06.785819 | Logical Clock Time: 177
+Received: 177 | System time: 2025-03-04 17:57:06.983866 | Logical Clock Time: 178 | Message Queue Length: 0
+Received: 179 | System time: 2025-03-04 17:57:07.184095 | Logical Clock Time: 180 | Message Queue Length: 0
+Received: 180 | System time: 2025-03-04 17:57:07.384517 | Logical Clock Time: 181 | Message Queue Length: 0
+Sent: 182 | System time: 2025-03-04 17:57:07.588475 | Logical Clock Time: 182
+Internal event | System time: 2025-03-04 17:57:07.785246 | Logical Clock Time: 183
+Sent: 184 | System time: 2025-03-04 17:57:07.985710 | Logical Clock Time: 184
+Internal event | System time: 2025-03-04 17:57:08.185687 | Logical Clock Time: 185
+Received: 186 | System time: 2025-03-04 17:57:08.385859 | Logical Clock Time: 187 | Message Queue Length: 0
+Sent: 188 | System time: 2025-03-04 17:57:08.587236 | Logical Clock Time: 188
+Sent: 189 | System time: 2025-03-04 17:57:08.786932 | Logical Clock Time: 189
+Internal event | System time: 2025-03-04 17:57:08.986399 | Logical Clock Time: 190
+Received: 191 | System time: 2025-03-04 17:57:09.187039 | Logical Clock Time: 192 | Message Queue Length: 0
+Internal event | System time: 2025-03-04 17:57:09.387506 | Logical Clock Time: 193
+Received: 192 | System time: 2025-03-04 17:57:09.588347 | Logical Clock Time: 194 | Message Queue Length: 2
+Received: 193 | System time: 2025-03-04 17:57:09.788524 | Logical Clock Time: 195 | Message Queue Length: 1
+Received: 193 | System time: 2025-03-04 17:57:09.989084 | Logical Clock Time: 196 | Message Queue Length: 0
+Sent: 197 | System time: 2025-03-04 17:57:10.191210 | Logical Clock Time: 197
+Received: 197 | System time: 2025-03-04 17:57:10.390161 | Logical Clock Time: 198 | Message Queue Length: 0
+Sent: 199 | System time: 2025-03-04 17:57:10.591553 | Logical Clock Time: 199
+Sent: 200 | System time: 2025-03-04 17:57:10.793932 | Logical Clock Time: 200
+Sent: 201 | System time: 2025-03-04 17:57:10.991288 | Logical Clock Time: 201
+Sent: 202 | System time: 2025-03-04 17:57:11.191531 | Logical Clock Time: 202
+Internal event | System time: 2025-03-04 17:57:11.391405 | Logical Clock Time: 203
+Internal event | System time: 2025-03-04 17:57:11.591911 | Logical Clock Time: 204
+Sent: 205 | System time: 2025-03-04 17:57:11.795905 | Logical Clock Time: 205
+Sent: 206 | System time: 2025-03-04 17:57:11.992989 | Logical Clock Time: 206
+Internal event | System time: 2025-03-04 17:57:12.192720 | Logical Clock Time: 207
+Internal event | System time: 2025-03-04 17:57:12.393095 | Logical Clock Time: 208
+Sent: 209 | System time: 2025-03-04 17:57:12.593632 | Logical Clock Time: 209
+Sent: 210 | System time: 2025-03-04 17:57:12.794600 | Logical Clock Time: 210
+Sent: 211 | System time: 2025-03-04 17:57:12.995034 | Logical Clock Time: 211
+Internal event | System time: 2025-03-04 17:57:13.195052 | Logical Clock Time: 212
+Internal event | System time: 2025-03-04 17:57:13.395343 | Logical Clock Time: 213
+Sent: 214 | System time: 2025-03-04 17:57:13.595749 | Logical Clock Time: 214
+Sent: 215 | System time: 2025-03-04 17:57:13.796407 | Logical Clock Time: 215
+Sent: 216 | System time: 2025-03-04 17:57:13.996896 | Logical Clock Time: 216
+Sent: 217 | System time: 2025-03-04 17:57:14.196833 | Logical Clock Time: 217
+Internal event | System time: 2025-03-04 17:57:14.396751 | Logical Clock Time: 218
+Received: 219 | System time: 2025-03-04 17:57:14.597302 | Logical Clock Time: 220 | Message Queue Length: 0
+Received: 220 | System time: 2025-03-04 17:57:14.797448 | Logical Clock Time: 221 | Message Queue Length: 0
+Received: 221 | System time: 2025-03-04 17:57:14.997618 | Logical Clock Time: 222 | Message Queue Length: 0
+Internal event | System time: 2025-03-04 17:57:15.198109 | Logical Clock Time: 223
+Received: 223 | System time: 2025-03-04 17:57:15.398440 | Logical Clock Time: 224 | Message Queue Length: 0
+Received: 224 | System time: 2025-03-04 17:57:15.598602 | Logical Clock Time: 225 | Message Queue Length: 1
+Received: 225 | System time: 2025-03-04 17:57:15.798882 | Logical Clock Time: 226 | Message Queue Length: 0
+Sent: 227 | System time: 2025-03-04 17:57:16.000150 | Logical Clock Time: 227
+Received: 228 | System time: 2025-03-04 17:57:16.199329 | Logical Clock Time: 229 | Message Queue Length: 0
+Internal event | System time: 2025-03-04 17:57:16.399530 | Logical Clock Time: 230
+Received: 230 | System time: 2025-03-04 17:57:16.599755 | Logical Clock Time: 231 | Message Queue Length: 0
+Sent: 232 | System time: 2025-03-04 17:57:16.802357 | Logical Clock Time: 232
+Received: 232 | System time: 2025-03-04 17:57:17.000397 | Logical Clock Time: 233 | Message Queue Length: 0
+Received: 234 | System time: 2025-03-04 17:57:17.200618 | Logical Clock Time: 235 | Message Queue Length: 0
+Received: 235 | System time: 2025-03-04 17:57:17.400865 | Logical Clock Time: 236 | Message Queue Length: 0
+Sent: 237 | System time: 2025-03-04 17:57:17.605754 | Logical Clock Time: 237
+Sent: 238 | System time: 2025-03-04 17:57:17.803757 | Logical Clock Time: 238
+Internal event | System time: 2025-03-04 17:57:18.002486 | Logical Clock Time: 239
+Sent: 240 | System time: 2025-03-04 17:57:18.203096 | Logical Clock Time: 240
+Sent: 241 | System time: 2025-03-04 17:57:18.403845 | Logical Clock Time: 241
+Internal event | System time: 2025-03-04 17:57:18.603184 | Logical Clock Time: 242
+Sent: 243 | System time: 2025-03-04 17:57:18.807787 | Logical Clock Time: 243
+Received: 243 | System time: 2025-03-04 17:57:19.004193 | Logical Clock Time: 244 | Message Queue Length: 0
+Internal event | System time: 2025-03-04 17:57:19.204410 | Logical Clock Time: 245
+Sent: 246 | System time: 2025-03-04 17:57:19.405025 | Logical Clock Time: 246
+Sent: 247 | System time: 2025-03-04 17:57:19.606911 | Logical Clock Time: 247
+Sent: 248 | System time: 2025-03-04 17:57:19.806008 | Logical Clock Time: 248
+Sent: 249 | System time: 2025-03-04 17:57:20.006373 | Logical Clock Time: 249
+Sent: 250 | System time: 2025-03-04 17:57:20.206029 | Logical Clock Time: 250
+Sent: 251 | System time: 2025-03-04 17:57:20.409323 | Logical Clock Time: 251
+Received: 251 | System time: 2025-03-04 17:57:20.606307 | Logical Clock Time: 252 | Message Queue Length: 0
+Sent: 253 | System time: 2025-03-04 17:57:20.807930 | Logical Clock Time: 253
+Internal event | System time: 2025-03-04 17:57:21.007036 | Logical Clock Time: 254
+Internal event | System time: 2025-03-04 17:57:21.207369 | Logical Clock Time: 255
+Received: 256 | System time: 2025-03-04 17:57:21.407483 | Logical Clock Time: 257 | Message Queue Length: 0
+Sent: 258 | System time: 2025-03-04 17:57:21.609674 | Logical Clock Time: 258
+Received: 258 | System time: 2025-03-04 17:57:21.808023 | Logical Clock Time: 259 | Message Queue Length: 0
+Internal event | System time: 2025-03-04 17:57:22.008161 | Logical Clock Time: 260
+Received: 260 | System time: 2025-03-04 17:57:22.208256 | Logical Clock Time: 261 | Message Queue Length: 0
+Internal event | System time: 2025-03-04 17:57:22.408713 | Logical Clock Time: 262
+Received: 262 | System time: 2025-03-04 17:57:22.608953 | Logical Clock Time: 263 | Message Queue Length: 1
+Received: 263 | System time: 2025-03-04 17:57:22.809368 | Logical Clock Time: 264 | Message Queue Length: 1
+Received: 264 | System time: 2025-03-04 17:57:23.009770 | Logical Clock Time: 265 | Message Queue Length: 1
+Received: 265 | System time: 2025-03-04 17:57:23.209908 | Logical Clock Time: 266 | Message Queue Length: 1
+Received: 266 | System time: 2025-03-04 17:57:23.410252 | Logical Clock Time: 267 | Message Queue Length: 1
+Received: 267 | System time: 2025-03-04 17:57:23.610762 | Logical Clock Time: 268 | Message Queue Length: 0
+Sent: 269 | System time: 2025-03-04 17:57:23.813549 | Logical Clock Time: 269
+Received: 270 | System time: 2025-03-04 17:57:24.011257 | Logical Clock Time: 271 | Message Queue Length: 0
+Received: 271 | System time: 2025-03-04 17:57:24.211462 | Logical Clock Time: 272 | Message Queue Length: 1
+Received: 272 | System time: 2025-03-04 17:57:24.411741 | Logical Clock Time: 273 | Message Queue Length: 0
+Received: 273 | System time: 2025-03-04 17:57:24.611967 | Logical Clock Time: 274 | Message Queue Length: 0
+Received: 274 | System time: 2025-03-04 17:57:24.812372 | Logical Clock Time: 275 | Message Queue Length: 1
+Received: 275 | System time: 2025-03-04 17:57:25.012725 | Logical Clock Time: 276 | Message Queue Length: 0
+Received: 277 | System time: 2025-03-04 17:57:25.213233 | Logical Clock Time: 278 | Message Queue Length: 0
+Sent: 279 | System time: 2025-03-04 17:57:25.413936 | Logical Clock Time: 279
+Received: 280 | System time: 2025-03-04 17:57:25.613844 | Logical Clock Time: 281 | Message Queue Length: 0
+Sent: 282 | System time: 2025-03-04 17:57:25.814997 | Logical Clock Time: 282
+Internal event | System time: 2025-03-04 17:57:26.014376 | Logical Clock Time: 283
+Internal event | System time: 2025-03-04 17:57:26.214543 | Logical Clock Time: 284
+Sent: 285 | System time: 2025-03-04 17:57:26.415298 | Logical Clock Time: 285
+Sent: 286 | System time: 2025-03-04 17:57:26.616975 | Logical Clock Time: 286
+Internal event | System time: 2025-03-04 17:57:26.815463 | Logical Clock Time: 287
+Received: 288 | System time: 2025-03-04 17:57:27.015732 | Logical Clock Time: 289 | Message Queue Length: 0
+Received: 289 | System time: 2025-03-04 17:57:27.216069 | Logical Clock Time: 290 | Message Queue Length: 0
+Received: 290 | System time: 2025-03-04 17:57:27.416418 | Logical Clock Time: 291 | Message Queue Length: 0
+Sent: 292 | System time: 2025-03-04 17:57:27.620104 | Logical Clock Time: 292
+Received: 292 | System time: 2025-03-04 17:57:27.817633 | Logical Clock Time: 293 | Message Queue Length: 0
+Internal event | System time: 2025-03-04 17:57:28.017890 | Logical Clock Time: 294
+Internal event | System time: 2025-03-04 17:57:28.218165 | Logical Clock Time: 295
+Received: 295 | System time: 2025-03-04 17:57:28.418385 | Logical Clock Time: 296 | Message Queue Length: 0
+Internal event | System time: 2025-03-04 17:57:28.618775 | Logical Clock Time: 297
+Received: 297 | System time: 2025-03-04 17:57:28.819101 | Logical Clock Time: 298 | Message Queue Length: 0
+Received: 298 | System time: 2025-03-04 17:57:29.019287 | Logical Clock Time: 299 | Message Queue Length: 0
+Received: 300 | System time: 2025-03-04 17:57:29.219583 | Logical Clock Time: 301 | Message Queue Length: 0
+Received: 301 | System time: 2025-03-04 17:57:29.420607 | Logical Clock Time: 302 | Message Queue Length: 0
+Internal event | System time: 2025-03-04 17:57:29.620757 | Logical Clock Time: 303
+Received: 303 | System time: 2025-03-04 17:57:29.821113 | Logical Clock Time: 304 | Message Queue Length: 1
+Received: 304 | System time: 2025-03-04 17:57:30.021330 | Logical Clock Time: 305 | Message Queue Length: 0
+Sent: 306 | System time: 2025-03-04 17:57:30.222066 | Logical Clock Time: 306
+Sent: 307 | System time: 2025-03-04 17:57:30.422751 | Logical Clock Time: 307
+Internal event | System time: 2025-03-04 17:57:30.622484 | Logical Clock Time: 308
+Internal event | System time: 2025-03-04 17:57:30.822925 | Logical Clock Time: 309
+Received: 311 | System time: 2025-03-04 17:57:31.024201 | Logical Clock Time: 312 | Message Queue Length: 0
+Sent: 313 | System time: 2025-03-04 17:57:31.226934 | Logical Clock Time: 313
+Received: 313 | System time: 2025-03-04 17:57:31.425238 | Logical Clock Time: 314 | Message Queue Length: 0
+Sent: 315 | System time: 2025-03-04 17:57:31.625826 | Logical Clock Time: 315
+Internal event | System time: 2025-03-04 17:57:31.825523 | Logical Clock Time: 316
+Received: 317 | System time: 2025-03-04 17:57:32.025993 | Logical Clock Time: 318 | Message Queue Length: 0
+Sent: 319 | System time: 2025-03-04 17:57:32.228674 | Logical Clock Time: 319
+Internal event | System time: 2025-03-04 17:57:32.426415 | Logical Clock Time: 320
+Received: 321 | System time: 2025-03-04 17:57:32.626724 | Logical Clock Time: 322 | Message Queue Length: 0
+Received: 322 | System time: 2025-03-04 17:57:32.826927 | Logical Clock Time: 323 | Message Queue Length: 0
+Received: 323 | System time: 2025-03-04 17:57:33.027220 | Logical Clock Time: 324 | Message Queue Length: 0
+Sent: 325 | System time: 2025-03-04 17:57:33.228031 | Logical Clock Time: 325
+Received: 325 | System time: 2025-03-04 17:57:33.427935 | Logical Clock Time: 326 | Message Queue Length: 0
+Internal event | System time: 2025-03-04 17:57:33.628913 | Logical Clock Time: 327
+
+============= VM LOG END =============
