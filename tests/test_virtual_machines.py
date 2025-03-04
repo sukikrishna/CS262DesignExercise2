@@ -18,9 +18,7 @@ class TestVirtualMachine(unittest.TestCase):
         """Set up two virtual machines for testing with enhanced validation"""
         self.simulation_id = 999  # Unique ID for testing logs
         
-        print("Creating VM1...")
         self.vm1 = VirtualMachine(vm_id=0, peers=[1], simulation_id=self.simulation_id)
-        print("Creating VM2...")
         self.vm2 = VirtualMachine(vm_id=1, peers=[0], simulation_id=self.simulation_id)
 
         # Ensure the server sockets are listening
@@ -37,8 +35,6 @@ class TestVirtualMachine(unittest.TestCase):
         if not check_port(5000 + self.vm1.vm_id) or not check_port(5000 + self.vm2.vm_id):
             self.fail("VM servers did not start successfully")
 
-        print("VM servers are confirmed to be running")
-
         # Start the VM processing threads
         self.vm1_thread = threading.Thread(target=self.vm1.run)
         self.vm2_thread = threading.Thread(target=self.vm2.run)
@@ -46,14 +42,10 @@ class TestVirtualMachine(unittest.TestCase):
         self.vm1_thread.start()
         self.vm2_thread.start()
 
-        print("Waiting for VMs to initialize...")
         time.sleep(3)
 
         if not (self.vm1.running and self.vm2.running):
             self.fail("VMs failed to start properly")
-
-        print("Setup complete, VMs ready for testing")
-
 
     def test_message_sending(self):
         """Test if VM1 can send a message to VM2 and VM2 receives it correctly"""
@@ -70,33 +62,23 @@ class TestVirtualMachine(unittest.TestCase):
                 self.vm1.logical_clock = 1
 
         initial_clock = self.vm1.logical_clock
-        print(f"VM1 initial logical clock: {initial_clock}")
 
         # Get VM2's initial logical clock
         initial_vm2_clock = self.vm2.logical_clock
 
         # Directly send a message from VM1 to VM2
         try:
-            print(f"Attempting to send message from VM{self.vm1.vm_id} to VM{self.vm2.vm_id}")
             with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
                 s.settimeout(5)
                 target_port = 5000 + self.vm2.vm_id
-                print(f"Connecting to localhost:{target_port}")
                 s.connect(("localhost", target_port))
                 message = str(initial_clock)
-                print(f"Sending message: {message}")
                 s.sendall(message.encode())
-                print("Message sent successfully")
         except Exception as e:
-            print(f"Error sending message: {e}")
             self.fail(f"Failed to send message: {e}")
 
         # Allow time for VM2 to process the message
         time.sleep(3)
-
-        # Instead of checking queue, verify that VM2's logical clock has increased
-        print(f"VM2 logical clock before message: {initial_vm2_clock}")
-        print(f"VM2 logical clock after message: {self.vm2.logical_clock}")
 
         # Restore VM2’s original running state
         self.vm2.running = original_processing

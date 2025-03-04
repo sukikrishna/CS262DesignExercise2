@@ -53,36 +53,34 @@ class VirtualMachine:
         self.server_thread = threading.Thread(target=self.listen_for_messages)
         self.server_thread.daemon = True
         self.server_thread.start()
-        time.sleep(2)  # Allow time for the server to fully initialize
 
     def listen_for_messages(self):
         """Thread for receiving messages and storing them in the network queue."""
-        try:
-            self.server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-            self.server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-            self.server_socket.bind(("localhost", 5000 + self.vm_id))
-            self.server_socket.listen(len(self.peers))
+        server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+        server_socket.bind(("localhost", 5000 + self.vm_id))
+        server_socket.listen(len(self.peers))
+        server_socket.settimeout(1.0)  # Allow periodic checking for shutdown
 
-            # Explicitly indicate that the server is accepting connections
-            print(f"VM{self.vm_id} is fully listening on port {5000 + self.vm_id}")
+        self.server_socket = server_socket  # Save reference to close later
 
-            while self.running:
-                try:
-                    conn, _ = self.server_socket.accept()
-                    client_handler = threading.Thread(target=self.handle_client, args=(conn,))
-                    client_handler.daemon = True
-                    client_handler.start()
-                except socket.timeout:
-                    continue
-                except Exception as e:
-                    if self.running:
-                        print(f"VM{self.vm_id} server error: {e}")
-
-        except Exception as e:
-            print(f"VM{self.vm_id} failed to start server: {e}")
-        finally:
-            self.server_socket.close()
-
+        while self.running:
+            try:
+                conn, addr = server_socket.accept()
+                client_handler = threading.Thread(
+                    target=self.handle_client,
+                    args=(conn,)
+                )
+                client_handler.daemon = True
+                client_handler.start()
+            except socket.timeout:
+                continue
+            except Exception as e:
+                if self.running:
+                    print(f"VM{self.vm_id} server error: {e}")
+        
+        server_socket.close()
+    
     def handle_client(self, conn):
         """Handle an individual client connection.
         
@@ -90,37 +88,12 @@ class VirtualMachine:
             conn: Socket connection to client.
         """
         try:
-            # Set a timeout on the connection to prevent hanging
-            conn.settimeout(5.0)
-            
-            # Read data from the connection
-            data = conn.recv(1024)
-            if not data:
-                print(f"VM{self.vm_id} received empty data")
-                return
-            
-            # Decode and process the message
-            message = data.decode()
-            print(f"VM{self.vm_id} received raw message: '{message}'")
-            
+            message = conn.recv(1024).decode()
             if message:
-                try:
-                    # Convert to integer and add to queue
-                    msg_value = int(message.strip())
-                    print(f"VM{self.vm_id} adding message with value {msg_value} to network queue")
-                    self.network_queue.put(msg_value)
-                except ValueError as ve:
-                    print(f"VM{self.vm_id} error converting message to int: {ve}, raw message: '{message}'")
-        except socket.timeout:
-            print(f"VM{self.vm_id} connection timed out while receiving data")
+                self.network_queue.put(int(message))  # Store in network queue
+            conn.close()
         except Exception as e:
             print(f"VM{self.vm_id} error handling client: {e}")
-        finally:
-            # Always close the connection
-            try:
-                conn.close()
-            except:
-                pass  # Ignore errors while closing
 
     def send_message(self, recipient_id):
         """Send logical clock time to another VM."""
@@ -175,12 +148,12 @@ class VirtualMachine:
 
             # Move messages from network queue to message queue
             while not self.network_queue.empty():
-                self.message_queue.put(self.network_queue.get())
+                self.message_queue.put(self.network_queue.get_nowait())
 
             # Process messages in the message queue
             if not self.message_queue.empty():
                 with self.lock:
-                    received_time = self.message_queue.get()
+                    received_time = self.message_queue.get_nowait()
                     self.logical_clock = max(self.logical_clock, received_time) + 1
                 self.log_event("Received", received_time)
             else:
