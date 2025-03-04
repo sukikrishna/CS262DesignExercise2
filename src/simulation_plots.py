@@ -7,6 +7,7 @@ import matplotlib.pyplot as plt
 def parse_log_file(file_path):
     """
     Parses a log file to extract system time, logical clock values, and tick rate.
+    Returns a DataFrame with the absolute system time (sorted) and logical clock values.
     """
     if not os.path.exists(file_path):
         print(f"Warning: {file_path} not found, skipping...")
@@ -31,11 +32,17 @@ def parse_log_file(file_path):
                 logical_clocks.append(logical_clock)
     
     df = pd.DataFrame({"System Time": system_times, "Logical Clock": logical_clocks})
+    # Sort DataFrame by absolute system time
+    df = df.sort_values("System Time")
     return df, tick_rate
+
+import matplotlib.dates as mdates
 
 def plot_simulations(data, output_path, title, single_sim=False):
     """
     Generates and saves a plot for multiple or single simulations.
+    Uses absolute system time (datetime) on the x-axis,
+    and forces the axis to show HH:MM:SS formatting.
     """
     plt.figure(figsize=(12, 6))
     vm_colors = {"VM0": "blue", "VM1": "green", "VM2": "red"}
@@ -44,9 +51,22 @@ def plot_simulations(data, output_path, title, single_sim=False):
         color = vm_colors.get(vm, "black")
         for sim_index, df, tick_rate in simulations:
             label = f"{vm} Sim {sim_index} (Tick Rate: {tick_rate})" if tick_rate else f"{vm} Sim {sim_index}"
-            marker_style = "o" if single_sim else None  # Use markers only for single simulation
-            plt.plot(df["System Time"], df["Logical Clock"], label=label, color=color, linestyle="-", marker=marker_style, markersize=3)
+            marker_style = "o" if single_sim else None
+            plt.plot(
+                df["System Time"], 
+                df["Logical Clock"], 
+                label=label,
+                color=color, 
+                linestyle="-", 
+                marker=marker_style, 
+                markersize=3
+            )
     
+    # Format the x-axis to show only the time (HH:MM:SS)
+    ax = plt.gca()
+    ax.xaxis.set_major_formatter(mdates.DateFormatter('%H:%M:%S'))
+    plt.gcf().autofmt_xdate()  # Optional: rotates and aligns the date labels
+
     plt.xlabel("System Time")
     plt.ylabel("Logical Clock Time")
     plt.title(title)
@@ -57,7 +77,7 @@ def plot_simulations(data, output_path, title, single_sim=False):
     print(f"Plot saved as {output_path}")
 
 def process_all_simulations():
-    """Processes and plots logical clock evolution over system time for all simulations across VMs."""
+    """Processes and plots logical clock evolution over absolute system time for all simulations across VMs."""
     files = {vm: [f"logs/sim{i}_{vm.lower()}_log.txt" for i in range(1, 6)] for vm in ["VM0", "VM1", "VM2"]}
     data = {vm: [] for vm in files}
     
@@ -66,12 +86,10 @@ def process_all_simulations():
             df, tick_rate = parse_log_file(file)
             if df is not None:
                 data[vm].append((sim_index, df, tick_rate))
-    
-    for vm, simulations in data.items():
-        if simulations:
-            plot_simulations({vm: simulations}, f"img/{vm}_logical_clock_plot.png", f"Logical Clock Evolution Over System Time for {vm}")
-    
-    plot_simulations(data, "img/all_vms_simulations_logical_clock_plot.png", "Logical Clock Evolution Over System Time for All VMs and Simulations")
+        
+    # Generate a combined plot for all VMs (x-axis will show the actual system time)
+    plot_simulations(data, "img/all_vms_simulations_logical_clock_plot.png", 
+                     "Logical Clock Evolution Over System Time for All VMs and Simulations")
 
 def process_single_simulation(simulation_number):
     """Processes and plots logical clock evolution for a single simulation across VMs."""
