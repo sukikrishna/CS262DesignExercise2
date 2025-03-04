@@ -220,7 +220,7 @@ def run_simulation(simulation_id):
         threads.append(thread)
 
     try:
-        print(f"Simulation {simulation_id + 1} running for 60 seconds...")
+        print(f"Simulation {simulation_id} running for 60 seconds...")
         time.sleep(60)
     except KeyboardInterrupt:
         print("Simulation interrupted by user")
@@ -236,7 +236,7 @@ def run_simulation(simulation_id):
     # Wait before starting the next simulation to prevent port conflicts
     time.sleep(3)  # Allow OS to release ports
 
-    print(f"Simulation {simulation_id + 1} complete. Check log files for details.")
+    print(f"Simulation {simulation_id} complete. Check log files for details.")
 
 def main():
     """
