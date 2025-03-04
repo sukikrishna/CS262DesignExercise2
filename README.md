@@ -1,6 +1,6 @@
-# CSDesignExercise2
+# Scale Models and Logical Clocks 
 
-This project implements a distributed system where multiple virtual machines (VMs) are running simultaneously and communicate with each other by exchanging messages.
+This project implements a distributed system where multiple virtual machines (VMs) are running simultaneously and communicate with each other by exchanging messages. Each VM operates with a unique clock rate, processes incoming messages, maintains its own logical clock (using Lamport’s algorithm), and logs events (sent, received, or internal) along with system time and logical clock values.
 
 ## Setup and Installation
 
@@ -25,4 +25,4 @@ Tests can be run with `pytest`:
 python -m pytest tests
 ```
 
-Running the program will output the logs for each virtual machine to separate files in the format sim[x]_vm[i]_log.txt, where x is the simulation number and i is the virtual machine number.
+Running the program will output the logs in `logs` directory for each virtual machine to separate files in the format sim[x]_vm[i]_log.txt, where x is the simulation number and i is the virtual machine number.
