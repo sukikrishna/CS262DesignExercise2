@@ -46,7 +46,7 @@ Each virtual machine maintains a logical clock that is updated based on Lamportâ
 2. Sending Messages:
 - When a VM decides to send a message (based on the random event 1-3), it calls `send_message(recipient_id)`
 - This method creates a socket connection to the recipient's port: `s.connect(("localhost", 5000 + recipient_id))`
-- It sends the current logical clock value as a message: s.`sendall(str(self.logical_clock).encode())`
+- It sends the current logical clock value as a message: `s.sendall(str(self.logical_clock).encode())`
 3. Receiving Messages:
 - The server thread accepts incoming connections: `conn, addr = server_socket.accept()`
 - For each connection, it spawns a client handler thread
@@ -75,6 +75,16 @@ We ran the model 5 times for one minute each time and observed the generated log
 
 * **Drift:** VMs with smaller clock rates will have larger drift because the gaps between operations are larger and they have larger logical clock jumps.
 
+##### Logical Clock Progression Across All VMs
+![Logical Clock Progression (All VMs)](img/all_vms_simulations_logical_clock_plot.png)
+
+    Figure 1: shows logical clock progression across all VMs for multiple simulation runs, highlighting jumps and drift patterns.
+
+##### Logical Clock Evolution for a Single VM
+![Logical Clock for a Single VM](img/single_sim1_logical_clock_plot.png)
+
+    Figure 2: zooms in on a single VMâ€™s logical clock over time, emphasizing how clock updates behave in response to messages and internal events.
+
 * **Asynchronous Behavior:** The VMs that have a lower clock rate will spend most of their time receiving messages and will not have enough time to send messages to other VMs due to inherent asynchrony.
 
 * **Message Queue Length:**: VMs with smaller clock rates will have larger message queues because they spend more time reading incoming messages relative to their ability to send.
@@ -101,6 +111,10 @@ We reran the simulations for the new the model 5 times for one minute each time 
 ---------------------------------------------------------
 
 ## Day to Day Progress
+
+#### March 3, 2025
+
+We added the variation of the code to have the reduced probability of there being an internal event and smaller variation of clock cycles. We reran the simulations upon this updated code, and analyzed the resulting logs and plots. We updated our Engineering Notebook with our observations and analysis regarding logical clock jumps, drift, synchronization, and size of message queues for both the original and variational setup of the code.
 
 #### Feb 27, 2025
 
