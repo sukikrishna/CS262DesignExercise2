@@ -78,12 +78,12 @@ We ran the model 5 times for one minute each time and observed the generated log
 ##### Logical Clock Progression Across All VMs
 ![Logical Clock Progression (All VMs)](img/all_vms_simulations_logical_clock_plot.png)
 
-    Figure 1: shows logical clock progression across all VMs for multiple simulation runs, highlighting jumps and drift patterns.
+**Figure 1**: shows logical clock progression across all VMs for multiple simulation runs, highlighting jumps and drift patterns.
 
 ##### Logical Clock Evolution for a Single VM
 ![Logical Clock for a Single VM](img/single_sim1_logical_clock_plot.png)
 
-    Figure 2: zooms in on a single VM’s logical clock over time, emphasizing how clock updates behave in response to messages and internal events.
+**Figure 2**: zooms in on a single VM’s logical clock over time, emphasizing how clock updates behave in response to messages and internal events.
 
 * **Asynchronous Behavior:** The VMs that have a lower clock rate will spend most of their time receiving messages and will not have enough time to send messages to other VMs due to inherent asynchrony.
 
