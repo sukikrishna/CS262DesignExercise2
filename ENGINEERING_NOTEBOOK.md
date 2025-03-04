@@ -57,6 +57,25 @@ Each virtual machine maintains a logical clock that is updated based on Lamportâ
 - If there's a message, it updates its logical clock according to the logical clock rules (taking the maximum of the received time and its own clock, then incrementing by 1)
 - If there's no message, it generates a random event (internal or send)
 
+--------------------------------------
+
+Analysis of Original Setup of Code
+
+We ran the model 5 times for one minute each time and observed the generated logs for the VMs and notices the following behaviours:
+* The VMs that have a smaller clock rate will spend most of their time receiving messages and will not have enough time to send messages to other VMs. This is because the Vms are asynchronous.
+* For VMs that have larger clock rates, they are less likely to have larger logical clock jumps. The gap between operations is smaller. For VMs that have smaller clock rates, they tend to have larger logical clock jumps and their gaps will be larger.
+* For drift, we observe similar patterns to the clock rate. VMs with smaller clock rates will have larger drift because the gaps between operations are larger and they have larger logical clock jumps.
+* VMs with smaller clock rates will have larger message queues, because they are less likely to send messages that are in the message queue, and it will take more time to read all of the incoming messages compared to VMs that have larger clock rates.
+
+Analysis of Variation of Original Setup of Code
+
+The original code was updated to make the VMs run with a smaller variation in the clock cycles, and a smaller probability of the event being internal, we made 2 changes:
+1. If there is no message in the queue, the virtual machine will generate a random number in the range of 1 to 5 instead of 1 to 10. This reduces the probability of there being an internal event from 70% to 20%.
+2. The VMs will be running with smaller variation in clock cycles, by limiting the clock cycles to be in the range of 3 to 5 instead of 1 to 6
+
+Upon the new variation in the code, after rerunning the simulation, what we find is that the virtual machines are less likely to have logical clock jumps and their gaps will be smaller. As such, their message queue will be shorter and the VMs will be more synchronized.
+
+
 ---------------------------------------------------------
 
 ## Day to Day Progress
