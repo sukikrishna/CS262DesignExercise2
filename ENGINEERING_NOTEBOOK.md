@@ -59,21 +59,43 @@ Each virtual machine maintains a logical clock that is updated based on Lamportâ
 
 --------------------------------------
 
-Analysis of Original Setup of Code
+## Experimental Analysis
 
-We ran the model 5 times for one minute each time and observed the generated logs for the VMs and notices the following behaviours:
-* The VMs that have a smaller clock rate will spend most of their time receiving messages and will not have enough time to send messages to other VMs. This is because the Vms are asynchronous.
-* For VMs that have larger clock rates, they are less likely to have larger logical clock jumps. The gap between operations is smaller. For VMs that have smaller clock rates, they tend to have larger logical clock jumps and their gaps will be larger.
-* For drift, we observe similar patterns to the clock rate. VMs with smaller clock rates will have larger drift because the gaps between operations are larger and they have larger logical clock jumps.
-* VMs with smaller clock rates will have larger message queues, because they are less likely to send messages that are in the message queue, and it will take more time to read all of the incoming messages compared to VMs that have larger clock rates.
+### Original Setup of Code
 
-Analysis of Variation of Original Setup of Code
+#### Configuration
+1. Each VM was assigned a clock rate chosen randomly between 1 and 6 ticks per second.
+2. On each clock cycle, the event was decided by generating a random number from 1 to 10.
+3. If the random number was 1, 2, or 3, the VM sent messages to one or both peers; otherwise, it treated the cycle as an internal event.
 
+#### Observations
+We ran the model 5 times for one minute each time and observed the generated logs for the VMs and noticed the following behaviours:
+
+* **Logical Clock Jumps:** VMs that have larger clock rates are less likely to have larger logical clock jumps. The gap between operations is smaller whereas VMs that have smaller clock rates tend to have larger logical clock jumps and their gaps will be larger. This happens because a slower VM, receiving a message from a faster VM, needed to update its clock by a larger amount to catch up.
+
+* **Drift:** VMs with smaller clock rates will have larger drift because the gaps between operations are larger and they have larger logical clock jumps.
+
+* **Asynchronous Behavior:** The VMs that have a lower clock rate will spend most of their time receiving messages and will not have enough time to send messages to other VMs due to inherent asynchrony.
+
+* **Message Queue Length:**: VMs with smaller clock rates will have larger message queues because they spend more time reading incoming messages relative to their ability to send.
+
+### Variation of Original Setup of Code
+
+#### Configuration
 The original code was updated to make the VMs run with a smaller variation in the clock cycles, and a smaller probability of the event being internal, we made 2 changes:
 1. If there is no message in the queue, the virtual machine will generate a random number in the range of 1 to 5 instead of 1 to 10. This reduces the probability of there being an internal event from 70% to 20%.
-2. The VMs will be running with smaller variation in clock cycles, by limiting the clock cycles to be in the range of 3 to 5 instead of 1 to 6
+2. The VMs will be running with smaller variation in clock cycles, by limiting the clock cycles to be in the range of 4 to 5 instead of 1 to 6
 
-Upon the new variation in the code, after rerunning the simulation, what we find is that the virtual machines are less likely to have logical clock jumps and their gaps will be smaller. As such, their message queue will be shorter and the VMs will be more synchronized.
+#### Observations
+We reran the simulations for the new the model 5 times for one minute each time and observed the generated logs for the VMs and noticed the following behaviours:
+
+* **Smaller Logical Clock Jumps:** With VMs having smaller variation in the clock cycles, their logical clocks remain more closely aligned. VMs are less likely to have larger logical clock jumps and their gaps will be smaller. 
+
+* **Smaller Drift:** The adjustments required upon receiving messages are smaller, leading to reduced drift between the machines.
+
+* **Increased Synchronization:** A higher probability of sending events increases inter-VM communication, promoting more frequent clock updates and better synchronization across the system.
+
+* **Balanced Message Queues:** Since the VMs process messages at a more similar pace, the message queue lengths are more balanced compared to the original setup where slower VMs accumulated longer queues.
 
 
 ---------------------------------------------------------
