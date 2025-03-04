@@ -87,13 +87,13 @@ We ran the model 5 times for one minute each time and observed the generated log
 
 * **Asynchronous Behavior:** The VMs that have a lower clock rate will spend most of their time receiving messages and will not have enough time to send messages to other VMs due to inherent asynchrony.
 
-* **Message Queue Length:**: VMs with smaller clock rates will have larger message queues because they spend more time reading incoming messages relative to their ability to send.
+* **Message Queue Length:**: VMs with smaller clock rates will have larger message queues because they spend more time receiving incoming messages relative to their ability to send.
 
 ### Variation of Original Setup of Code
 
 #### Configuration
 The original code was updated to make the VMs run with a smaller variation in the clock cycles, and a smaller probability of the event being internal, we made 2 changes:
-1. If there is no message in the queue, the virtual machine will generate a random number in the range of 1 to 5 instead of 1 to 10. This reduces the probability of there being an internal event from 70% to 20%.
+1. If there is no message in the queue, the virtual machine will generate a random number in the range of 1 to 5 instead of 1 to 10. This reduces the probability of there being an internal event from 70% to 40%.
 2. The VMs will be running with smaller variation in clock cycles, by limiting the clock cycles to be in the range of 4 to 5 instead of 1 to 6
 
 #### Observations
