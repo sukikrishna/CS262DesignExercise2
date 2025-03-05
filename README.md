@@ -20,7 +20,7 @@ python src/virtual_machines.py
 
 ### Tests
 
-Tests can be run with `pytest`:
+Tests can be run with `pytest`. The reported tests coverage by `pytest` is `91%`:
 ```bash
 python -m pytest tests
 ```
