@@ -75,19 +75,25 @@ We ran the model 5 times for one minute each time and observed the generated log
 
 * **Drift:** VMs with smaller clock rates will have larger drift because the gaps between operations are larger and they have larger logical clock jumps.
 
-##### Logical Clock Progression Across All VMs
-![Logical Clock Progression (All VMs)](img/all_vms_simulations_logical_clock_plot.png)
+![Logical Clock Progression for All VMs](img/all_vms_simulations_logical_clock_plot.png)
 
-**Figure 1**: shows logical clock progression across all VMs for multiple simulation runs, highlighting jumps and drift patterns.
+**Figure 1**: Logical clock progression across all VMs for 5 simulation runs, highlighting jumps and drift patterns.
 
-##### Logical Clock Evolution for a Single VM
 ![Logical Clock for a Single VM](img/single_sim1_logical_clock_plot.png)
 
-**Figure 2**: zooms in on a single VM’s logical clock over time, emphasizing how clock updates behave in response to messages and internal events.
+**Figure 2**: Zoom in on a single VM’s logical clock over time, emphasizing how clock updates behave in response to messages and internal events.
 
-* **Asynchronous Behavior:** The VMs that have a lower clock rate will spend most of their time receiving messages and will not have enough time to send messages to other VMs due to inherent asynchrony.
+* **Asynchronous Behavior:** The VMs that have a lower clock rate will spend most of their time receiving messages and will not have enough time to send messages to other VMs due to inherent asynchrony as shown in Figure 3 for VM2 which has a clock rate of 1 tick per second.
 
-* **Message Queue Length:**: VMs with smaller clock rates will have larger message queues because they spend more time receiving incoming messages relative to their ability to send.
+![Frequency of Event Sim 1](img/sim1_event_counts_bar_chart.png)
+
+**Figure 3**: Frequency of each event type for Simulation 1.
+
+* **Message Queue Length:**: VMs with smaller clock rates will have larger message queues because they spend more time receiving incoming messages relative to their ability to send. Figure 4 demonstrates this by showing the rise in message queue for VMs with a clock rate of 1 tick per second.
+
+![Message Queue Length Change for All VMs](img/all_vms_simulations_queue_length_plot.png)
+
+**Figure 4**: Message queue length change across all VMs for 5 simulation runs.
 
 ### Variation of Original Setup of Code
 
@@ -103,10 +109,21 @@ We reran the simulations for the new the model 5 times for one minute each time 
 
 * **Smaller Drift:** The adjustments required upon receiving messages are smaller, leading to reduced drift between the machines.
 
-* **Increased Synchronization:** A higher probability of sending events increases inter-VM communication, promoting more frequent clock updates and better synchronization across the system.
+![Logical Clock Progression for the Variation Experiment (All VMs)](img/variation_all_vms_simulations_logical_clock_plot.png)
 
-* **Balanced Message Queues:** Since the VMs process messages at a more similar pace, the message queue lengths are more balanced compared to the original setup where slower VMs accumulated longer queues.
+**Figure 5**: Logical clock progression for the variation experiment across all VMs for multiple simulation runs, highlighting smaller jumps and drift patterns.
 
+* **Increased Synchronization:** A higher probability of sending events increases inter-VM communication, promoting more frequent clock updates and better synchronization across the system. Figure 6 shows more probability of sending and receiving messages as compared to internal events.
+
+![Frequency of Event Sim 1 for Variation Experiment](img/variation_sim1_event_counts_bar_chart.png)
+
+**Figure 6**: Frequency of each event type for Simulation 1 for the Variation Experiment.
+
+* **Balanced Message Queues:** Since the VMs process messages at a more similar pace, the message queue lengths are more balanced compared to the original setup where slower VMs accumulated longer queues as shown in Figure 7.
+
+![Message Queue Length Change for All VMs](img/variation_all_vms_simulations_queue_length_plot.png)
+
+**Figure 7**: Message queue length change across all VMs for 5 simulation runs, highlighting more balanced queue length.
 
 ---------------------------------------------------------
 
