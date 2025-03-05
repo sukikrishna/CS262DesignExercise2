@@ -131,7 +131,7 @@ We reran the simulations for the new the model 5 times for one minute each time 
 
 #### Configuration
 The original code was updated to make the VMs run with a larger variation in the clock cycles, and a larger probability of the event being internal, we made 2 changes:
-1. If there is no message in the queue, the virtual machine will generate a random number in the range of 1 to 20 instead of 1 to 10. This reduces the probability of there being an internal event from 70% to 40%.
+1. If there is no message in the queue, the virtual machine will generate a random number in the range of 1 to 20 instead of 1 to 10. This reduces the probability of there being an internal event from 70% to 85%.
 2. The VMs will be running with smaller variation in clock cycles, by limiting the clock cycles to be in the range of 1 to 9 instead of 1 to 6
 
 #### Observations
