@@ -97,6 +97,8 @@ We ran the model 5 times for one minute each time and observed the generated log
 
 ### Variation of Original Setup of Code
 
+### Smaller Variation of Clock Rates and Smaller Probability of Internal Events
+
 #### Configuration
 The original code was updated to make the VMs run with a smaller variation in the clock cycles, and a smaller probability of the event being internal, we made 2 changes:
 1. If there is no message in the queue, the virtual machine will generate a random number in the range of 1 to 5 instead of 1 to 10. This reduces the probability of there being an internal event from 70% to 40%.
@@ -124,6 +126,30 @@ We reran the simulations for the new the model 5 times for one minute each time 
 ![Message Queue Length Change for All VMs](img/variation_all_vms_simulations_queue_length_plot.png)
 
 **Figure 7**: Message queue length change across all VMs for 5 simulation runs, highlighting more balanced queue length.
+
+### Larger Variation and Larger Probability of Internal Events
+
+#### Configuration
+The original code was updated to make the VMs run with a larger variation in the clock cycles, and a larger probability of the event being internal, we made 2 changes:
+1. If there is no message in the queue, the virtual machine will generate a random number in the range of 1 to 20 instead of 1 to 10. This reduces the probability of there being an internal event from 70% to 40%.
+2. The VMs will be running with smaller variation in clock cycles, by limiting the clock cycles to be in the range of 1 to 9 instead of 1 to 6
+
+#### Observations
+We reran the simulations for the new the model 5 times for one minute each time and observed the generated logs for the VMs and noticed the following behaviours which were similar to the other variations:
+
+* **Logical Clock Jumps and Drift:** With VMs having larger variation in the clock cycles, their logical clocks remain more closely aligned in terms of jumps and drift when the difference between clock rates is less whereas the jumps are bigger when the difference between the clock rates are more.
+
+![Logical Clock Progression for the Larger Variation Experiment (All VMs)](img/extra_all_vms_simulations_logical_clock_plot.png)
+
+**Figure 8**: Logical clock progression for the larger variation experiment across all VMs for multiple simulation runs.
+
+* **Synchronization:** A higher probability of internal events decreases inter-VM communication, promoting more frequent clock updates and better synchronization across the system. Figure 6 shows more probability of sending and receiving messages as compared to internal events.
+
+* **Message Queues:** VMs process messages at a more similar pace when the difference in clock rates is less, the message queue lengths are more balanced but when the difference between clock rates are more then the slower VMs accumulated longer queues as shown in Figure 9.
+
+![Message Queue Length Change for All VMs Larger Variation](img/extra_all_vms_simulations_queue_length_plot.png)
+
+**Figure 9**: Message queue length change across all VMs for 5 simulation runs for larger variation, highlighting more balanced queue length.
 
 ---------------------------------------------------------
 
