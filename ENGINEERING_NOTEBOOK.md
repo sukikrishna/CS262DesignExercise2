@@ -129,6 +129,22 @@ We reran the simulations for the new the model 5 times for one minute each time 
 
 ## Day to Day Progress
 
+#### March 4, 2025
+
+We focused on updating our distributed system simulation code by moving from a thread-based implementation to a process-based one, aligning with the assignment’s requirement to emulate independent machines. We also fixed some minor formatting bugs in our simulation plots and created presentation slides summarizing our implementation, design choices, and performance comparisons between the original and modified versions.
+
+##### Work Completed:
+
+- Updated the virtual machine implementation to use multiprocessing instead of threading, ensuring each VM runs as an independent process with separate memory.
+- Refactored simulation control logic to properly terminate processes when interrupted (handling port conflicts caused by orphaned processes).
+- Debugged and fixed formatting issues in the simulation plots, ensuring clear visualization of logical clock jumps, drift, and message queue variations across different VM configurations.
+- Generated new comparison plots showing the behavior of the original and modified implementations.
+- Created presentation slides to share during the demo including details on:
+    - Implementation details and architectural changes.
+    - The rationale behind switching from threading to multiprocessing.
+    - Observations and key insights from the simulation results.
+- Discussed potential future refinements, such as adding more varied network conditions or testing with a larger number of VMs.
+
 #### March 3, 2025
 
 We added the variation of the code to have the reduced probability of there being an internal event and smaller variation of clock cycles. We reran the simulations upon this updated code, and analyzed the resulting logs and plots. We updated our Engineering Notebook with our observations and analysis regarding logical clock jumps, drift, synchronization, and size of message queues for both the original and variational setup of the code.
@@ -158,7 +174,8 @@ We mainly discussed the behavior of the machine’s message handling during slee
 - Confirmed that logical clocks are modified by the run only, with no multithreading involved.
 
 #### Feb 25, 2025
-we reviewed the design exercise requirements and discussed various approaches to implementing the project.
+
+We reviewed the design exercise requirements and discussed various approaches to implementing the project.
 
 ##### Work Completed:
 - Reviewed design exercise requirements.

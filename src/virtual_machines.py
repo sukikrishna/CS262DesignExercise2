@@ -1,3 +1,4 @@
+import multiprocessing
 import threading
 import socket
 import random
@@ -193,6 +194,10 @@ class VirtualMachine:
             self.log_file.close()
         print(f"VM{self.vm_id} stopped")
 
+def run_vm(vm_id, peers, simulation_id):
+    vm = VirtualMachine(vm_id, peers, simulation_id)
+    vm.run()
+
 def run_simulation(simulation_id):
     """
     Runs a single instance of the virtual machine simulation.
@@ -205,37 +210,27 @@ def run_simulation(simulation_id):
     logical clocks. The simulation runs for 60 seconds before shutting down.
     """
     num_machines = 3
-    machines = []
-
-    # Create virtual machines
+    processes = []
+    
     for vm_id in range(num_machines):
         peers = [j for j in range(num_machines) if j != vm_id]
-        machines.append(VirtualMachine(vm_id, peers, simulation_id))
-
-    # Start all machines in separate threads
-    threads = []
-    for vm in machines:
-        thread = threading.Thread(target=vm.run)
-        thread.start()
-        threads.append(thread)
-
+        p = multiprocessing.Process(target=run_vm, args=(vm_id, peers, simulation_id))
+        p.start()
+        processes.append(p)
+    
     try:
         print(f"Simulation {simulation_id} running for 60 seconds...")
         time.sleep(60)
     except KeyboardInterrupt:
         print("Simulation interrupted by user")
-
-    # Stop all machines
-    for vm in machines:
-        vm.stop()
-
-    # Wait for all threads to complete
-    for thread in threads:
-        thread.join()
-
-    # Wait before starting the next simulation to prevent port conflicts
-    time.sleep(3)  # Allow OS to release ports
-
+    
+    for p in processes:
+        p.terminate()
+    
+    for p in processes:
+        p.join()
+    
+    time.sleep(3)
     print(f"Simulation {simulation_id} complete. Check log files for details.")
 
 def main():
@@ -245,7 +240,7 @@ def main():
     This function runs the virtual machine simulation five times,
     each for a duration of 60 seconds.
     """
-    for i in range(1,6):
+    for i in range(1, 6):
         run_simulation(i)
 
 if __name__ == "__main__":
