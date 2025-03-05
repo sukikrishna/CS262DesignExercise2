@@ -149,6 +149,11 @@ We reran the simulations for the new the model 5 times for one minute each time 
 
 **Figure 9**: Message queue length change across all VMs for 5 simulation runs for larger variation, highlighting more balanced queue length.
 
+### Testing and Documentation
+* We have two test scripts for testing the functions and the edge cases.
+* The pytest coverage report gave `91%` test coverage.
+* The code also has Google style docstrings for the documentations of the code.
+
 ---------------------------------------------------------
 
 ## Day to Day Progress
