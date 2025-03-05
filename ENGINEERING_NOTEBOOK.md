@@ -16,8 +16,8 @@ In our design, messages are first received in the network queue, which operates 
 Each VM listens on a different port because they're all running on the same machine (i.e. 127.0.0.1 or localhost). If they used the same port, there would be a conflict since only one process can bind to a specific port at a time.
 We assign each VM a unique port by adding the VM's ID to a base port number (5000). So VM 0 listens on port 5000, VM 1 on port 5001, and VM 2 on port 5002.
 
-### 3. Each VM is Handled in a Separate Thread
-Initially we thought to implement each of the VMs as a separate process but later decided to implement each VM in a separate thread for simplicity. We implemented the VirtualMachine class as a regular class and used threads to run each VM instance concurrently. This design allows VMs to execute independently while still sharing memory, making message passing easier without requiring inter-process communication.
+### 3. Each VM is Handled in a Separate Process
+Initially, we considered implementing each VM as a separate thread but later opted to use processes. We implemented the VirtualMachine class as a standard class and used multiprocessing.Process to run each VM instance independently. This design ensures proper isolation between VMs while still allowing internal threading for message handling within each process. By using separate processes, we prevent unintended shared memory access, ensuring that message passing occurs exclusively through inter-process communication (IPC) via sockets, accurately simulating a distributed system.
 
 Our implementation uses three threads to handle different aspects of each VM's operation:
 1. Main Thread: Initializes the VMs and runs the main execution logic

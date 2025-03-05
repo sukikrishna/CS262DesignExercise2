@@ -226,8 +226,6 @@ def run_simulation(simulation_id):
     
     for p in processes:
         p.terminate()
-    
-    for p in processes:
         p.join()
     
     time.sleep(3)
