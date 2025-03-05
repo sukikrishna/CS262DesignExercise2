@@ -29,7 +29,7 @@ However, to ensure synchronization, only the main execution thread updates the l
 We decided to keep the server continuously listening for incoming messages using a dedicated thread without blocking execution. Each incoming message spawns a new thread to handle the client request, allowing multiple messages to be received in parallel. A timeout mechanism ensures that the server remains responsive and can shut down gracefully when needed.
 
 ### 5. Thread-Safe Synchronization with Locks
-We use a thread lock to ensure that updates to the logical clock are atomic since multiple threads access the logical clock concurrently (main thread, message processing thread, network listener). This prevents race conditions where two threads might update the clock simultaneously, leading to inconsistencies.
+We use a thread lock to ensure that updates to the logical clock are atomic within each VM process. Although VMs run as separate processes and do not share memory, each VM still uses internal threads (e.g., the main execution thread, message processing thread, and network listener). The thread lock prevents race conditions within a single VM, ensuring that logical clock updates remain consistent when multiple internal threads access it simultaneously.
 
 ### 6. Logical Clock Update Following [Lamport's algorithm](https://en.wikipedia.org/wiki/Lamport_timestamp)
 Each virtual machine maintains a logical clock that is updated based on Lamport’s logical clock rules:
