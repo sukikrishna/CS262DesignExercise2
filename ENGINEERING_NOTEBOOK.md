@@ -143,8 +143,6 @@ We reran the simulations for the new the model 5 times for one minute each time 
 
 **Figure 8**: Logical clock progression for the larger variation experiment across all VMs for multiple simulation runs.
 
-* **Synchronization:** A higher probability of internal events decreases inter-VM communication, promoting more frequent clock updates and better synchronization across the system. Figure 6 shows more probability of sending and receiving messages as compared to internal events.
-
 * **Message Queues:** VMs process messages at a more similar pace when the difference in clock rates is less, the message queue lengths are more balanced but when the difference between clock rates are more then the slower VMs accumulated longer queues as shown in Figure 9.
 
 ![Message Queue Length Change for All VMs Larger Variation](img/extra_all_vms_simulations_queue_length_plot.png)
