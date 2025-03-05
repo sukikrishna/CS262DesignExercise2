@@ -154,6 +154,14 @@ We reran the simulations for the new the model 5 times for one minute each time 
 * The pytest coverage report gave `91%` test coverage.
 * The code also has Google style docstrings for the documentations of the code.
 
+### Conclusions
+Our experimental analysis highlighted key behaviors in distributed logical clocks, including clock drift, logical clock jumps, and message queue growth patterns. We demonstrated that varying clock rates and event probabilities significantly impact system synchronization and message handling. Specifically:
+
+* VMs with lower clock rates experience higher drift as they adjust to received messages.
+* Reducing internal event probability improves synchronization, as more messages are exchanged between VMs.
+* A larger variation in clock rates increases clock drift and message queue imbalances, particularly for slower VMs.
+* Additionally, by refining the logical clock rules and optimizing message queues, we improved system responsiveness and stability.
+
 ---------------------------------------------------------
 
 ## Day to Day Progress
